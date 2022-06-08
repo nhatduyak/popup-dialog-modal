@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Models
 {
-    public class TransactionModel
+    public class Transaction
     {
         [Key]
         public int TransactionId { get; set; }
@@ -20,5 +20,7 @@ namespace App.Models
         public string   SWIFTCode { get; set; }
 
         public double Amount { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

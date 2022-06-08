@@ -1,7 +1,18 @@
+using App.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+// builder.Services.AddDbContext<TransactionDbContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("TransactionDbContext") ?? throw new InvalidOperationException("Connection string 'TransactionDbContext' not found.")));
+// builder.Services.AddDbContext<TransactionDbcontext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<TransactionDbcontext>(options=>{
+options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"));
+});
 
 var app = builder.Build();
 
@@ -22,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Transaction}/{action=Index}/{id?}");
 
 app.Run();
